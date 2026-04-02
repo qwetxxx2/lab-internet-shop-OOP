@@ -31,26 +31,76 @@
 
 UML-диаграмма:
 
-```mermaid
 classDiagram
 
+%% ======================
+%% БАЗОВЫЙ КЛАСС
+%% ======================
 class BaseEntity {
     <<abstract>>
-    - _id
-    - _name
-    + get_info()
-    + validate()
+    - _id: int
+    - _name: str
+
+    + id: int
+    + name: str
+
+    + get_info() str
+    + validate() bool
 }
 
+%% ======================
+%% ТОВАР
+%% ======================
 class Product {
-    - _price
-    - _stock
+    - _price: float
+    - _stock: int
+
+    + price: float
+    + stock: int
+
+    + get_info() str
+    + validate() bool
+
+    + decrease_stock(amount: int) void
+    + increase_stock(amount: int) void
 }
 
+%% ======================
+%% КОРЗИНА
+%% ======================
 class CartItem {
-    - _product_id
-    - _quantity
+    - _product_id: int
+    - _quantity: int
+
+    + product_id: int
+    + quantity: int
+
+    + get_info() str
+    + validate() bool
+
+    + add_quantity(amount: int) void
+    + remove_quantity(amount: int) void
 }
+
+%% ======================
+%% МЕНЕДЖЕР БД
+%% ======================
+class DatabaseManager {
+    - conn
+    - cursor
+
+    + create_tables() void
+    + save(obj: BaseEntity) void
+    + get_all_products() List~Product~
+    + get_all_cart_items() List~CartItem~
+}
+
+%% ======================
+%% СВЯЗИ
+%% ======================
 
 BaseEntity <|-- Product
 BaseEntity <|-- CartItem
+
+DatabaseManager --> Product
+DatabaseManager --> CartItem
