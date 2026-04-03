@@ -49,7 +49,6 @@ class Product(BaseEntity):
         """Есть ли товар в наличии"""
         return self._stock > 0
 
-    # ===== ОБЯЗАТЕЛЬНЫЕ =====
     def get_info(self):
         return f"[Product] {self._name} | Цена: {self._price:.2f} | Остаток: {self._stock}"
 
