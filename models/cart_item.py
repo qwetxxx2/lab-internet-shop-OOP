@@ -41,7 +41,6 @@ class CartItem(BaseEntity):
         """Стоимость позиции"""
         return product.price * self._quantity
 
-    # ===== ОБЯЗАТЕЛЬНЫЕ =====
     def get_info(self):
         return f"[CartItem] {self._name} | Product ID: {self._product_id} | Кол-во: {self._quantity}"
 
